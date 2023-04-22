@@ -21,7 +21,7 @@ def execute(query):
 
 @app.route('/')
 def mainpage():
-  if not True: #check login
+  if True: #check login
     return redirect("/login")
   
   return render_template("main.html")
