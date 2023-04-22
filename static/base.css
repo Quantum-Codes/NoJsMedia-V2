@@ -21,3 +21,7 @@ body {
   background: green;
   transition: background 0.1s linear;
 }
+
+#content {
+  margin: 1em;
+}
