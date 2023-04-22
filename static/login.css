@@ -5,6 +5,7 @@
 
 .smaller {
   font-size: 0.6em;
+  margin-left: 0.5em;
 }
 
 form {
@@ -41,6 +42,10 @@ input:focus {
   transition: border 0.2s;
 }
 
-.input:focus ~ p { /* not working*/
+p.smaller:has(+ input:focus) {
   color: white;
+}
+
+.material-symbols-outlined {
+  display: inline; /*not working*/
 }
