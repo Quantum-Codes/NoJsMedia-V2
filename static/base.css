@@ -1,7 +1,12 @@
 body {
   margin: 0px;
-  background: black;
+  background: black; /* later use media selector for theme */
   color: white;
+}
+
+a {
+  text-decoration: none;
+  color: #0099ff; /* later use media selector for theme */
 }
 
 #navbar {

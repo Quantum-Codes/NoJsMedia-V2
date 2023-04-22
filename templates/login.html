@@ -4,5 +4,18 @@
 <!-- MERGE THIS WITH SIGNUP PAGE TOO. make a mode="login/signup" in render_template and just make if loop here to change h1 and its footer-->
 {% block content %}
 <h1>Login to your account</h1>
-<p>Don't have an account? <a href="/signup">Sign up</a>.</p>
+<p class="greytext">Don't have an account? <a href="/signup">Sign up</a>.</p>
+
+<form action="/login" method="post">
+  <div class="input-container">
+    <p class="greytext smaller">Username</p>
+    <input type= "text" name="username" required>
+  </div>
+
+  <div class="input-container">
+    <p class="greytext smaller">Password</p>
+    <input type= "text" name="password" required>
+  </div>
+
+</form>
 {% endblock %}
