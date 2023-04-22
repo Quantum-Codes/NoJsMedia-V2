@@ -28,6 +28,6 @@ def mainpage():
 
 @app.route("/login")
 def loginpage():
-  return "login"
+  return render_template("login.html")
 
 app.run(host='0.0.0.0', port=8080)
