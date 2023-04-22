@@ -21,10 +21,10 @@ def execute(query):
 
 @app.route('/')
 def mainpage():
-  if  True: #check login
+  if not True: #check login
     return redirect("/login")
   
-  return "hey"
+  return render_template("main.html")
 
 @app.route("/login")
 def loginpage():
