@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, render_template
 import mysql.connector, os
 
 app = Flask('app')
@@ -20,7 +20,14 @@ def execute(query):
  
 
 @app.route('/')
-def hello_world():
-  return 'Hello, World!'
+def mainpage():
+  if  True: #check login
+    return redirect("/login")
+  
+  return "hey"
+
+@app.route("/login")
+def loginpage():
+  return "login"
 
 app.run(host='0.0.0.0', port=8080)
