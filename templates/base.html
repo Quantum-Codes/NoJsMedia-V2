@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="static/base.css">
+    <link rel="stylesheet" href="static/{% block css%}{% endblock %}.css">
+  </head>
+  <body>
+    <div id = "navbar">
+      <div class="nav-blocks"><i>NoJsMedia v2</i></div>
+      <div class="nav-blocks">Explore</div>
+      <div class="nav-blocks">Another thing</div>
+      <div class="nav-blocks">404</div>
+    </div>
+    <div id="content">
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>
