@@ -1,10 +1,14 @@
 {% extends "base.html" %}
-{% block title %}Login{% endblock %}
+{% block title %}{{mode.title()}}{% endblock %}
 {% block css %}login{% endblock %}
 <!-- MERGE THIS WITH SIGNUP PAGE TOO. make a mode="login/signup" in render_template and just make if loop here to change h1 and its footer-->
 {% block content %}
 <h1>Login to your account</h1>
-<p class="greytext">Don't have an account? <a href="/signup">Sign up</a>.</p>
+{% if mode == "login" %}
+  <p class="greytext">Don't have an account? <a href="/signup">Sign up</a>.</p>
+{% else %}
+  <p class="greytext">Don't have an account? <a href="/login">Log in</a>.</p>
+{% endif %}
 
 <form action="/login" method="post">
   <div class="input-container">
