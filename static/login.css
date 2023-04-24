@@ -61,7 +61,8 @@ span.material-symbols-outlined {
 
 #button-container {
   margin: 1.5em;
-  width: min-content;
+  width: calc(300px + 2em);
+  text-align: center;
 }
 
 .buttons {
@@ -72,7 +73,6 @@ span.material-symbols-outlined {
   border: solid 0px var(--bordercolor); /* if none then transition doesn't work */
   transform: scale(1);
   transition: transform 0.2s, border 0.2s;
-  
 }
 
 .buttons[type=submit] {
