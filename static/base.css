@@ -30,3 +30,7 @@ a {
 #content {
   margin: 1em;
 }
+
+.material-symbols-outlined {
+  vertical-align: middle;
+}
