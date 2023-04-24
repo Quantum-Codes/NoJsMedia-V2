@@ -11,26 +11,24 @@ a {
 }
 
 @keyframes glow {
-  0%, 100% {
-    border-width: 3px;
+  from {
+    box-shadow: 0 0 10px -10px #33b4ff;
   }
-  50% {
-    border-width: 10px;
+  to {
+    box-shadow: 0 0 10px 10px #33b4ff;
   }
 }
 
 #navbar {
   background: #318ce0;
-  border: solid 7px #318ce050; /*last 2 digit = 80 = 50% opacity*/
-  background-clip: padding-box;
   /* opacity: 0.9; */
   display: flex;
-  /* margin: 1em auto; */
+  margin: 1em;
   border-radius: 1em;
   justify-content: start;
   padding-left: 2em;
   padding-right: 2em;
-  /* animation: glow 5s infinite; */
+  animation: glow 5s infinite alternate;
 }
 
 .nav-blocks {
