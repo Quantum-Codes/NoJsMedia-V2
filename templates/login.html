@@ -3,14 +3,18 @@
 {% block css %}login{% endblock %}
 <!-- MERGE THIS WITH SIGNUP PAGE TOO. make a mode="login/signup" in render_template and just make if loop here to change h1 and its footer-->
 {% block content %}
-<h1>Login to your account</h1>
+
 {% if mode == "login" %}
+  <h1>Login to your account</h1>
   <p class="greytext">Don't have an account? <a href="/signup">Sign up</a>.</p>
+  {% set buttontext = "Log in" %}
 {% else %}
-  <p class="greytext">Don't have an account? <a href="/login">Log in</a>.</p>
+  <h1>Create an account</h1>
+  <p class="greytext">Already have an account? <a href="/login">Log in</a>.</p>
+  {% set buttontext = "Create account" %}
 {% endif %}
 
-<form action="/login" method="post">
+<form action="/{{mode}}" method="post">
   <div class="input-container">
     <p class="greytext smaller">Username</p>
     <span class="material-symbols-outlined">account_circle</span><input type= "text" name="username" required>
@@ -23,7 +27,7 @@ lock
     </span><input type= "password" name="password" required>
   </div>
   <div id="button-container">
-    <input class="buttons" type="reset" value="Clear all" /><input class="buttons" type="submit" value="Create account" />
+    <input class="buttons" type="reset" value="Clear all" /><input class="buttons" type="submit" value="{{buttontext}}" />
   </div>
 </form>
 {% endblock %}
