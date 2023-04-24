@@ -29,6 +29,10 @@ def mainpage():
 
 @app.route("/login")
 def loginpage():
-  return render_template("login.html")
+  return render_template("login.html", mode = "login")
+
+@app.route("/signup")
+def signuppage():
+  return render_template("login.html", mode = "signup")
 
 app.run(host='0.0.0.0', port=8080)
