@@ -1,3 +1,7 @@
+:root {
+  --bordercolor: #0084ff;
+}
+
 .greytext {
   color: #bfbfbf;
   font-size: 0.9em;
@@ -8,15 +12,17 @@
   margin-left: 0.5em;
   margin-bottom: 2px;
   margin-top: 1px;
+  font-weight: bold;
 }
 
 form {
   margin: 1em;
   margin-top: 3em;
+  width: content-fit;
 }
 
 .input-container {
-  background: #4f4f4f;
+  background: #005285;
   border-radius: 10px;
   padding: 5px;
   margin: 1em;
@@ -29,18 +35,19 @@ p {
   margin: 0px;
 }
 
-input {
+input[type = text], input[type = password] {
   background: inherit;
-  border: none;
+  border: solid 0px var(--bordercolor);
   color: white;
+  width: 300px;
 }
 
-input:focus {
+input[type=text]:focus, input[type=password]:focus {
   outline: none;
 }
 
 .input-container:has(> input:focus) {
-  border: solid 2px #0084ff;
+  border: solid 2px var(--bordercolor);
   transition: border 0.2s;
 }
 
@@ -50,5 +57,30 @@ p.smaller:has(+ input:focus) {
 
 span.material-symbols-outlined {
   margin-right: 2px;
+}
+
+#button-container {
+  margin: 1.5em;
+  width: min-content;
+}
+
+.buttons {
+  padding: 1em;
+  width: 150px;
+  margin: 0.5em;
+  border-radius: 5em;
+  border: solid 0px var(--bordercolor); /* if none then transition doesn't work */
+  transform: scale(1);
+  transition: transform 0.2s, border 0.2s;
   
+}
+
+.buttons[type=submit] {
+  background: #0090ff;
+}
+
+.buttons:hover {
+  transform: scale(1.02);
+  border: 2px solid var(--bordercolor);
+  transition: transform 0.2s, border 0.2s:
 }

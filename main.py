@@ -2,6 +2,7 @@ from flask import Flask, redirect, render_template
 import mysql.connector, os
 
 app = Flask('app')
+"""
 db = mysql.connector.connect( 
   host = os.environ["Host"],
   user = os.environ["User"],
@@ -17,7 +18,7 @@ def result():
 def execute(query):
   sql.execute(query)
   result()
- 
+"""
 
 @app.route('/')
 def mainpage():
