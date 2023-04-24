@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{mode.title()}}{% endblock %}
 {% block css %}login{% endblock %}
-<!-- MERGE THIS WITH SIGNUP PAGE TOO. make a mode="login/signup" in render_template and just make if loop here to change h1 and its footer-->
 {% block content %}
 
 {% if mode == "login" %}
