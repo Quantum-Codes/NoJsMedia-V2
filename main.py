@@ -25,18 +25,18 @@ def mainpage():
   if True: #check login
     return redirect("/login")
   
-  return render_template("main.html")
+  return render_template("main.html"), 200
 
 @app.route("/login", methods=["GET", "POST"])
 def loginpage():
-  return render_template("login.html", mode = "login")
+  return render_template("login.html", mode = "login"), 200
 
 @app.route("/signup", methods=["GET", "POST"])
 def signuppage():
-  return render_template("login.html", mode = "signup")
+  return render_template("login.html", mode = "signup"), 200
 
 @app.errorhandler(404)
 def notfoundpage(e):
-  return "no"
+  return render_template("404.html"), 404
 
 app.run(host='0.0.0.0', port=8080)
