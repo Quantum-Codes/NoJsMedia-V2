@@ -23,7 +23,7 @@ def execute(query):
 @app.route('/')
 def mainpage():
   if True: #check login
-    return redirect("/login")
+    return redirect("/logi")
   
   return render_template("main.html"), 200
 
