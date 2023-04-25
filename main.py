@@ -36,7 +36,7 @@ def signuppage():
   return render_template("login.html", mode = "signup")
 
 @app.errorhandler(404)
-def notfoundpage():
+def notfoundpage(e):
   return "no"
 
 app.run(host='0.0.0.0', port=8080)
