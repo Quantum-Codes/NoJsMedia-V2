@@ -57,10 +57,11 @@ p.smaller:has(+ input:focus) {
 
 span.material-symbols-outlined {
   margin-right: 2px;
+  margin-left: 2px;
 }
 
 #button-container {
-  margin: 1.5em;
+  margin: 1.2em;
   width: calc(300px + 2em);
   text-align: center;
 }

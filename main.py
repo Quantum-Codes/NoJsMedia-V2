@@ -27,12 +27,16 @@ def mainpage():
   
   return render_template("main.html")
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def loginpage():
   return render_template("login.html", mode = "login")
 
-@app.route("/signup")
+@app.route("/signup", methods=["GET", "POST"])
 def signuppage():
   return render_template("login.html", mode = "signup")
+
+@app.errorhandler(404)
+def notfoundpage():
+  return "no"
 
 app.run(host='0.0.0.0', port=8080)
