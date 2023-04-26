@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template
+from flask import Flask, redirect, render_template, request 
 import mysql.connector, os
 
 app = Flask('app')
@@ -23,20 +23,23 @@ def execute(query):
 @app.route('/')
 def mainpage():
   if True: #check login
-    return redirect("/logi")
+    return redirect("/login")
   
-  return render_template("main.html"), 200
+  return render_template("main.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def loginpage():
-  return render_template("login.html", mode = "login"), 200
+  if request.method == "POST":
+    pass
+    
+  return render_template("login.html", mode = "login")
 
 @app.route("/signup", methods=["GET", "POST"])
 def signuppage():
-  return render_template("login.html", mode = "signup"), 200
+  return render_template("login.html", mode = "signup")
 
 @app.errorhandler(404)
 def notfoundpage(e):
-  return render_template("404.html"), 404
+  return render_template("404.html")
 
 app.run(host='0.0.0.0', port=8080)
