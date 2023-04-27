@@ -30,7 +30,9 @@ def mainpage():
 @app.route("/login", methods=["GET", "POST"])
 def loginpage():
   if request.method == "POST":
-    pass
+    if not (request.form["username"] and request.form["password"]):
+      return "empty stuff noob"
+      
     
   return render_template("login.html", mode = "login")
 
