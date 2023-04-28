@@ -31,14 +31,13 @@ def mainpage():
 def loginpage():
   if request.method == "POST":
     if not (request.form["username"] and request.form["password"]):
-      return "empty stuff noob"
-      
+      return render_template("login.html", mode = "login", error = "Username or password field was left empty")
     
-  return render_template("login.html", mode = "login")
+  return render_template("login.html", mode = "login", error = False)
 
 @app.route("/signup", methods=["GET", "POST"])
 def signuppage():
-  return render_template("login.html", mode = "signup")
+  return render_template("login.html", mode = "signup", error = False)
 
 @app.errorhandler(404)
 def notfoundpage(e):

@@ -1,5 +1,6 @@
 :root {
   --bordercolor: #0084ff;
+  --messagecolor: #002775;
 }
 
 .greytext {
@@ -55,9 +56,10 @@ p.smaller:has(+ input:focus) {
   color: white;
 }
 
-span.material-symbols-outlined {
+.material-symbols-rounded {
   margin-right: 2px;
   margin-left: 2px;
+  vertical-align: middle;
 }
 
 #button-container {
@@ -84,4 +86,28 @@ span.material-symbols-outlined {
   transform: scale(1.02);
   border: 2px solid var(--bordercolor);
   transition: transform 0.2s, border 0.2s:
+}
+
+#message {
+  border: solid 2px #0015cf;
+  color: #00b0e6;
+  background: var(--messagecolor);
+  border-radius: 10px;
+  margin-bottom: 1em;
+  display: flex;
+  height: 2em;
+}
+
+#error {
+  width: 100%;
+  vertical-align: middle;
+}
+
+
+#icon {
+  font-size: 1.2em;
+  height: 100%;
+  background: linear-gradient(var(--messagecolor), var(--messagecolor)) padding-box, linear-gradient(transparent, lightblue, transparent) border-box; /* inherit doesn't work. so had to use vars */
+  border-radius: 10px 0px 0px 10px;
+  border-right: 1px solid transparent;
 }

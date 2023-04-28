@@ -16,14 +16,20 @@
 <form action="/{{mode}}" method="post">
   <div class="input-container">
     <p class="greytext smaller">Username</p>
-    <span class="material-symbols-outlined">account_circle</span><input type= "text" name="username" required>
+    <span class="material-symbols-rounded">account_circle</span><input type= "text" name="username" required>
   </div>
 
   <div class="input-container">
     <p class="greytext smaller">Password</p>
-    <span class="material-symbols-outlined">lock</span><input type= "password" name="password" required>
+    <span class="material-symbols-rounded">lock</span><input type= "password" name="password" required>
   </div>
   <div id="button-container">
+    {% if error %}
+    <div id="message">
+       <div id="icon"><span class="material-symbols-rounded">warning</span></div>
+       <span id="error">{{error}}</span>
+    </div>
+    {% endif %}
     <input class="buttons" type="reset" value="Clear all" /><input class="buttons" type="submit" value="{{buttontext}}" />
   </div>
 </form>
