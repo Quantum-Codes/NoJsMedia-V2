@@ -55,6 +55,10 @@ a {
   transition: background 0.1s linear;
 }
 
+.nav-blocks > a > span {
+  margin-right: 4px;
+}
+
 #content {
   margin: 2em;
   margin-top: 1em;
