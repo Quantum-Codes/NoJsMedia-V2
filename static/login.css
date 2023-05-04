@@ -95,7 +95,6 @@ p.smaller:has(+ input:focus) {
   border-radius: 10px;
   margin-bottom: 1em;
   display: flex;
-  height: 2em;
 }
 
 #error {
