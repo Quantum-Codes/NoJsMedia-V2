@@ -1,5 +1,5 @@
 from flask import Flask, redirect, render_template, request, make_response
-import mysql.connector, os, re
+import mysql.connector, os, re, secrets
 import bcrypt
 #REMAKE DIV CONTAINING ERROR MESSAGE
 app = Flask('app')
@@ -49,14 +49,17 @@ id BIGINT UNSIGNED NOT NULL UNIQUE, #this became primary key automatically someh
 username varchar(25) NOT NULL UNIQUE,
 display varchar(25),
 password binary(60) NOT NULL,
+session char(32) UNIQUE,
 bio TEXT,
 about TEXT
 );"""
 
 @app.route('/')
 def mainpage():
-  if True: #check login
+  if not request.cookies.get("session"):
     return redirect("/login")
+  if not False: #verify session
+    pass
   
   return render_template("main.html")
 
@@ -79,7 +82,9 @@ def loginpage():
       return respond("login", "temp", "Incorrect password.", 2)
 
     #Verified user from here
-    return "True. now should add session cookie and redirect to main site"
+    session = secrets.token_urlsafe(32)
+    sql.execute("UPDATE Users SET session = %s WHERE username = %s", params = (session, username))
+    return respond("/", "session", session)
     
   return render_template("login.html", mode = "login", error = request.cookies.get("temp"))
 
