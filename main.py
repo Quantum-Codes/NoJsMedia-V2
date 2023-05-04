@@ -1,9 +1,21 @@
 from flask import Flask, redirect, render_template, request 
-import mysql.connector, os
+import mysql.connector, os, re
 import bcrypt
-
+#REMAKE DIV CONTAINING ERROR MESSAGE
 app = Flask('app')
+uname = re.compile("^[A-Za-z0-9-_]{3,25}$")
+
+"""regex tester 
+x = lambda y: print("\n".join([str(uname.fullmatch(i)) for i in y]))
+x([
+  "abchfyyfyf",
+  "srhtsthth\n097dbt",
+  "dthhtddththdtdhthdthdthdyhdyhddyhydhyhdyhdhycchy",
+  "tr64fy6rdt-txtx__"
+])
+exit()
 #"""
+#"""uncomment to remove connection
 db = mysql.connector.connect( 
   host = os.environ["Host"],
   user = os.environ["User"],
@@ -67,6 +79,9 @@ def signuppage():
     if not (request.form["username"] and request.form["password"]):
       return render_template("login.html", mode = "signup", error = "Username or password field was left empty")
     username = request.form["username"].strip()
+    if not uname.fullmatch(username):
+      return render_template("login.html", mode="signup", error = "Username must have length of 3 to 25 and only characters A-Z, a-z, 0-9, '-', '_'")
+
     sql.execute("INSERT INTO Users (id, username, display, password) VALUES (UUID_SHORT(), %s, %s, %s)", params=(username.lower(), username, hashit(request.form["password"])))
     db.commit()
   return render_template("login.html", mode = "signup", error = False)
