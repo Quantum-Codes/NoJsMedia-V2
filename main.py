@@ -65,7 +65,7 @@ def signuppage():
     if not (request.form["username"] and request.form["password"]):
       return render_template("login.html", mode = "signup", error = "Username or password field was left empty")
     username = request.form["username"].strip()
-    sql.execute("INSERT INTO Users (id, username, display, password) VALUES (UUID_SHORT(), %s, %s)", params=(username.lower(), username, hashit(request.form["password"])))
+    sql.execute("INSERT INTO Users (id, username, display, password) VALUES (UUID_SHORT(), %s, %s, %s)", params=(username.lower(), username, hashit(request.form["password"])))
     db.commit()
   return render_template("login.html", mode = "signup", error = False)
 
