@@ -40,6 +40,10 @@ a {
   border-radius: 2px;
 }
 
+.nav-blocks > a {
+  color: inherit;
+}
+    
 .nav-blocks:hover {
   background: #006cd1;
   transition: background 0.1s linear;
