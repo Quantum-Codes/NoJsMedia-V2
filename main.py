@@ -4,7 +4,7 @@ import bcrypt
 #REMAKE DIV CONTAINING ERROR MESSAGE
 app = Flask('app')
 uname = re.compile("^[A-Za-z0-9-_]{3,25}$")
-passwd = re.compile("^[A-Za-z0-9-_\$@\&!£#€₹₩\?]{3,50}$")
+passwd = re.compile("^[A-Za-z0-9-_\$@\&!#\?]{3,50}$")
 
 """regex tester 
 x = lambda y: print("\n".join([str(uname.fullmatch(i)) for i in y]))
@@ -44,46 +44,56 @@ def respond(page, cookiename, val, expiry=60*60*24*7): #1 week auto expire
   res.set_cookie(cookiename, val, expiry)
   return res
 
+def get_session(request):
+  sql.execute("SELECT username, display FROM Users WHERE session = %s;", params=(request.cookies.get("session"),))
+  data = [i for i in sql]
+  return data
+
 """CREATE TABLE Users (
 id BIGINT UNSIGNED NOT NULL UNIQUE, #this became primary key automatically somehow
 username varchar(25) NOT NULL UNIQUE,
 display varchar(25),
 password binary(60) NOT NULL,
-session char(32) UNIQUE,
+session varchar(64) UNIQUE, #max 1 char = 2 byte for token urlsafe. so 32*2=64 max session len
 bio TEXT,
 about TEXT
 );"""
 
 @app.route('/')
 def mainpage():
-  if not request.cookies.get("session"):
-    return redirect("/login")
-  if not False: #verify session
-    pass
-  
-  return render_template("main.html")
+  loggedin = False 
+  if request.cookies.get("session"):
+    session = get_session(request)
+    if not session:
+      return respond("/", "session", "", 0) #delete session cookie
+    loggedin = True
+    username, displayname = session[0]
+  else:
+    username = displayname = "guest"
+  return render_template("main.html", user = displayname, loggedin = loggedin)
 
 @app.route("/login", methods=["GET", "POST"])
 def loginpage():
   if request.method == "POST":
     if not (request.form["username"] and request.form["password"]):
-      return respond("login", "temp", "Username or password field was left empty.", 2)
+      return respond("/login", "temp", "Username or password field was left empty.", 2)
     username = request.form["username"].strip().lower()
     if not uname.fullmatch(username): #saves a useless read
-      return respond("login", "temp", "No such user exists.", 2)
+      return respond("/login", "temp", "No such user exists.", 2)
     if not passwd.fullmatch(request.form["password"]):
-      return respond("login", "temp", "Invalid password.", 2)
+      return respond("/login", "temp", "Invalid password.", 2)
       
     sql.execute("SELECT password FROM Users WHERE username = %s;", params=(username,))
     password = [i for i in sql]
     if not password: #no user. so empty
-      return respond("login", "temp", "No such user exists.", 2)
+      return respond("/login", "temp", "No such user exists.", 2)
     if not compareit(password[0][0], request.form["password"]):
-      return respond("login", "temp", "Incorrect password.", 2)
+      return respond("/login", "temp", "Incorrect password.", 2)
 
     #Verified user from here
     session = secrets.token_urlsafe(32)
     sql.execute("UPDATE Users SET session = %s WHERE username = %s", params = (session, username))
+    db.commit()
     return respond("/", "session", session)
     
   return render_template("login.html", mode = "login", error = request.cookies.get("temp"))
@@ -92,12 +102,12 @@ def loginpage():
 def signuppage():
   if request.method == "POST":
     if not (request.form["username"] and request.form["password"]):
-      return respond("signup", "temp", "Username or password field was left empty.", 2)
+      return respond("/signup", "temp", "Username or password field was left empty.", 2)
     username = request.form["username"].strip()
     if not uname.fullmatch(username):
-      return respond("signup", "temp", "Username must have length of 3 to 25 and only characters A-Z, a-z, 0-9, '-', '_'", 2)
+      return respond("/signup", "temp", "Username must have length of 3 to 25 and only characters A-Z, a-z, 0-9, '-', '_'", 2)
     if not passwd.fullmatch(request.form["password"]):
-      return respond("signup", "temp", "Password must have length of 3 to 50 and only characters A-Z, a-z, 0-9, &,#,₩,₹,£,€,&,!,@,?", 2)
+      return respond("/signup", "temp", "Password must have length of 3 to 50 and only characters A-Z, a-z, 0-9, &,#,₩,₹,£,€,&,!,@,?", 2)
 
     sql.execute("INSERT INTO Users (id, username, display, password) VALUES (UUID_SHORT(), %s, %s, %s)", params=(username.lower(), username, hashit(request.form["password"])))
     db.commit()
