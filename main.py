@@ -24,7 +24,7 @@ def hashit(password):
   return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()) #don't need to save salts
   
 def compareit(hashed, password):
-  return bcrypt.checkpw(password, hashed)
+  return bcrypt.checkpw(password.encode("utf-8"), hashed)
 
 """CREATE TABLE Users (
 id BIGINT UNSIGNED NOT NULL UNIQUE, #this became primary key automatically somehow
