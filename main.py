@@ -87,18 +87,18 @@ def loginpage():
 def signuppage():
   if request.method == "POST":
     if not (request.form["username"] and request.form["password"]):
-      return render_template("login.html", mode = "signup", error = "Username or password field was left empty")
+      return respond("signup", "temp", "Username or password field was left empty.", 2)
     username = request.form["username"].strip()
     if not uname.fullmatch(username):
-      return render_template("login.html", mode="signup", error = "Username must have length of 3 to 25 and only characters A-Z, a-z, 0-9, '-', '_'")
+      return respond("signup", "temp", "Username must have length of 3 to 25 and only characters A-Z, a-z, 0-9, '-', '_'", 2)
     if not passwd.fullmatch(request.form["password"]):
-      return render_template("login.html", mode="login", error = "Password must have length of 3 to 50 and only characters A-Z, a-z, 0-9, &,#,₩,₹,£,€,&,!,@,?") #auto sanitized by flask
+      return respond("signup", "temp", "Password must have length of 3 to 50 and only characters A-Z, a-z, 0-9, &,#,₩,₹,£,€,&,!,@,?", 2)
 
     sql.execute("INSERT INTO Users (id, username, display, password) VALUES (UUID_SHORT(), %s, %s, %s)", params=(username.lower(), username, hashit(request.form["password"])))
     db.commit()
     return "Created user. Should add session and redirect to main site."
     
-  return render_template("login.html", mode = "signup", error = False)
+  return render_template("login.html", mode = "signup", error = request.cookies.get("temp"))
 
 @app.errorhandler(404)
 def notfoundpage(e):
