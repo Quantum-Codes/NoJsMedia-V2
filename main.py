@@ -4,6 +4,7 @@ import bcrypt
 #REMAKE DIV CONTAINING ERROR MESSAGE
 app = Flask('app')
 uname = re.compile("^[A-Za-z0-9-_]{3,25}$")
+passwd = re.compile("^[A-Za-z0-9-_\$@\&!£#€₹₩\?]{3,50}$")
 
 """regex tester 
 x = lambda y: print("\n".join([str(uname.fullmatch(i)) for i in y]))
@@ -63,6 +64,8 @@ def loginpage():
     username = request.form["username"].strip().lower()
     if not uname.fullmatch(username): #saves a useless read
       return render_template("login.html", mode = "login", error = "No such user exists.")
+    if not passwd.fullmatch(request.form["password"]):
+      return render_template("login.html", mode = "login", error = "Invalid password.")
       
     sql.execute("SELECT password FROM Users WHERE username = %s;", params=(username,))
     password = [i for i in sql]
@@ -84,6 +87,8 @@ def signuppage():
     username = request.form["username"].strip()
     if not uname.fullmatch(username):
       return render_template("login.html", mode="signup", error = "Username must have length of 3 to 25 and only characters A-Z, a-z, 0-9, '-', '_'")
+    if not passwd.fullmatch(request.form["password"]):
+      return render_template("login.html", mode = "login", error = "Password must have length of 3 to 50 and only characters A-Z, a-z, 0-9, &,#,₩,₹,£,€,&,!,@,?") #auto sanitized by flask
 
     sql.execute("INSERT INTO Users (id, username, display, password) VALUES (UUID_SHORT(), %s, %s, %s)", params=(username.lower(), username, hashit(request.form["password"])))
     db.commit()
