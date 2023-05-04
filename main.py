@@ -24,7 +24,8 @@ def hashit(password):
   return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()) #don't need to save salts
   
 def compareit(hashed, password):
-  return bcrypt.checkpw(password.encode("utf-8"), hashed)
+  #print(bytes(password, "utf-8"))
+  return bcrypt.checkpw(password.encode("utf-8"), bytes(hashed)) #convert bytearray by sql to bytes
 
 """CREATE TABLE Users (
 id BIGINT UNSIGNED NOT NULL UNIQUE, #this became primary key automatically somehow
@@ -50,12 +51,13 @@ def loginpage():
 
     sql.execute("SELECT password FROM Users WHERE username = %s;", params=(request.form["username"].strip().lower(),))
     password = [i for i in sql]
+    print(password)
     if not password: #no user. so empty
       return render_template("login.html",  mode="login", error="No user exists")
-    if compareit(password[0], request.form["password"]):
-      return True
+    if compareit(password[0][0], request.form["password"]):
+      return "True"
     else: 
-      return False
+      return "False"
     
   return render_template("login.html", mode = "login", error = False)
 
