@@ -21,16 +21,16 @@ def execute(query):
   result()
 #"""
 def hashit(password):
-  return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8") #don't need to save salts
+  return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()) #don't need to save salts
   
 def compareit(hashed, password):
-  return bcrypt.checkpw(password.encode("utf-8"), hashed)
+  return bcrypt.checkpw(password, hashed)
 
 """CREATE TABLE Users (
-id BIGINT UNSIGNED UNIQUE,
-username varchar(25) UNIQUE,
+id BIGINT UNSIGNED NOT NULL UNIQUE, #this became primary key automatically somehow
+username varchar(25) NOT NULL UNIQUE,
 display varchar(25),
-password varchar(30),
+password binary(60) NOT NULL,
 bio TEXT,
 about TEXT
 );"""
