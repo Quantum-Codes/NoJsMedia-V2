@@ -60,16 +60,19 @@ def loginpage():
   if request.method == "POST":
     if not (request.form["username"] and request.form["password"]):
       return render_template("login.html", mode = "login", error = "Username or password field was left empty")
-
-    sql.execute("SELECT password FROM Users WHERE username = %s;", params=(request.form["username"].strip().lower(),))
+    username = request.form["username"].strip().lower()
+    if not uname.fullmatch(username): #saves a useless read
+      return render_template("login.html", mode = "login", error = "No such user exists.")
+      
+    sql.execute("SELECT password FROM Users WHERE username = %s;", params=(username,))
     password = [i for i in sql]
-    print(password)
     if not password: #no user. so empty
-      return render_template("login.html",  mode="login", error="No user exists")
-    if compareit(password[0][0], request.form["password"]):
-      return "True"
-    else: 
-      return "False"
+      return render_template("login.html",  mode="login", error="No such user exists.")
+    if not compareit(password[0][0], request.form["password"]):
+      return render_template("login.html", mode = "login", error = "Incorrect password.")
+
+    #Verified user from here
+    return "True. now should add session cookie and redirect to main site"
     
   return render_template("login.html", mode = "login", error = False)
 
@@ -84,6 +87,8 @@ def signuppage():
 
     sql.execute("INSERT INTO Users (id, username, display, password) VALUES (UUID_SHORT(), %s, %s, %s)", params=(username.lower(), username, hashit(request.form["password"])))
     db.commit()
+    return "Created user. Should add session and redirect to main site."
+    
   return render_template("login.html", mode = "signup", error = False)
 
 @app.errorhandler(404)
