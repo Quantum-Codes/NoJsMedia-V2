@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request 
+from flask import Flask, redirect, render_template, request, make_response
 import mysql.connector, os, re
 import bcrypt
 #REMAKE DIV CONTAINING ERROR MESSAGE
@@ -37,8 +37,12 @@ def hashit(password):
   return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()) #don't need to save salts
   
 def compareit(hashed, password):
-  #print(bytes(password, "utf-8"))
   return bcrypt.checkpw(password.encode("utf-8"), bytes(hashed)) #convert bytearray by sql to bytes
+
+def respond(page, cookiename, val, expiry=60*60*24*7): #1 week auto expire
+  res = make_response(redirect(page))
+  res.set_cookie(cookiename, val, expiry)
+  return res
 
 """CREATE TABLE Users (
 id BIGINT UNSIGNED NOT NULL UNIQUE, #this became primary key automatically somehow
@@ -60,24 +64,24 @@ def mainpage():
 def loginpage():
   if request.method == "POST":
     if not (request.form["username"] and request.form["password"]):
-      return render_template("login.html", mode = "login", error = "Username or password field was left empty")
+      return respond("login", "temp", "Username or password field was left empty.", 2)
     username = request.form["username"].strip().lower()
     if not uname.fullmatch(username): #saves a useless read
-      return render_template("login.html", mode = "login", error = "No such user exists.")
+      return respond("login", "temp", "No such user exists.", 2)
     if not passwd.fullmatch(request.form["password"]):
-      return render_template("login.html", mode = "login", error = "Invalid password.")
+      return respond("login", "temp", "Invalid password.", 2)
       
     sql.execute("SELECT password FROM Users WHERE username = %s;", params=(username,))
     password = [i for i in sql]
     if not password: #no user. so empty
-      return render_template("login.html",  mode="login", error="No such user exists.")
+      return respond("login", "temp", "No such user exists.", 2)
     if not compareit(password[0][0], request.form["password"]):
-      return render_template("login.html", mode = "login", error = "Incorrect password.")
+      return respond("login", "temp", "Incorrect password.", 2)
 
     #Verified user from here
     return "True. now should add session cookie and redirect to main site"
     
-  return render_template("login.html", mode = "login", error = False)
+  return render_template("login.html", mode = "login", error = request.cookies.get("temp"))
 
 @app.route("/signup", methods=["GET", "POST"])
 def signuppage():
@@ -88,7 +92,7 @@ def signuppage():
     if not uname.fullmatch(username):
       return render_template("login.html", mode="signup", error = "Username must have length of 3 to 25 and only characters A-Z, a-z, 0-9, '-', '_'")
     if not passwd.fullmatch(request.form["password"]):
-      return render_template("login.html", mode = "login", error = "Password must have length of 3 to 50 and only characters A-Z, a-z, 0-9, &,#,₩,₹,£,€,&,!,@,?") #auto sanitized by flask
+      return render_template("login.html", mode="login", error = "Password must have length of 3 to 50 and only characters A-Z, a-z, 0-9, &,#,₩,₹,£,€,&,!,@,?") #auto sanitized by flask
 
     sql.execute("INSERT INTO Users (id, username, display, password) VALUES (UUID_SHORT(), %s, %s, %s)", params=(username.lower(), username, hashit(request.form["password"])))
     db.commit()

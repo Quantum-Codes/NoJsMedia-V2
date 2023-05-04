@@ -8,6 +8,10 @@
   font-size: 0.9em;
 }
 
+h1 {
+  margin-bottom: 0.25em;
+}
+
 .smaller {
   font-size: 0.6em;
   margin-left: 0.5em;

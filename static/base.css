@@ -37,16 +37,17 @@ a {
   color: black;
   background: inherit;
   transition: background 0.1s linear;
+  border-radius: 2px;
 }
 
 .nav-blocks:hover {
-  background: green;
+  background: #006cd1;
   transition: background 0.1s linear;
 }
 
 #content {
   margin: 2em;
-  margin-top: 0px;
+  margin-top: 1em;
 }
 
 .material-symbols-rounded {
