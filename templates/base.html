@@ -17,9 +17,12 @@
         <div class="nav-blocks"><a href="/404">404</a></div>
       </div>
       <div id="nav-right">
+      {% if not loggedin %}
         <div class="nav-blocks"><a href="/signup">Signup</a></div>
-        <div class="nav-blocks"><a href="/login">Login</a></div> 
+        <div class="nav-blocks"><a href="/login">Login</a></div>
+      {% else %}
         <div class="nav-blocks"><a href="/logout">Logout icon</a></div>
+      {% endif %}
       </div>
     </div>
     <div id="content">

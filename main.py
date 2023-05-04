@@ -2,6 +2,7 @@ from flask import Flask, redirect, render_template, request, make_response
 import mysql.connector, os, re, secrets
 import bcrypt
 #REMAKE DIV CONTAINING ERROR MESSAGE
+#ONLY MAIN PAGE ACTUALLY VERIFIES SESSION. OTHERS SIMPLY CHECK THE PRESENCE OF SESSION COOKIE
 app = Flask('app')
 uname = re.compile("^[A-Za-z0-9-_]{3,25}$")
 passwd = re.compile("^[A-Za-z0-9-_\$@\&!#\?]{3,50}$")
@@ -96,7 +97,7 @@ def loginpage():
     db.commit()
     return respond("/", "session", session)
     
-  return render_template("login.html", mode = "login", error = request.cookies.get("temp"))
+  return render_template("login.html", mode = "login", error = request.cookies.get("temp"), loggedin = request.cookies.get("session"))
 
 @app.route("/signup", methods=["GET", "POST"])
 def signuppage():
@@ -113,7 +114,7 @@ def signuppage():
     db.commit()
     return "Created user. Should add session and redirect to main site."
     
-  return render_template("login.html", mode = "signup", error = request.cookies.get("temp"))
+  return render_template("login.html", mode = "signup", error = request.cookies.get("temp"), loggedin = request.cookies.get("session"))
 
 @app.errorhandler(404)
 def notfoundpage(e):
