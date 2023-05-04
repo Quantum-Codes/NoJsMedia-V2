@@ -23,12 +23,18 @@ a {
   background: #318ce0;
   /* opacity: 0.9; */
   display: flex;
+  flex-direction: row;
   margin: 1em;
   border-radius: 1em;
-  justify-content: start;
+  justify-content: space-between;
   padding-left: 2em;
   padding-right: 2em;
   animation: glow 4s cubic-bezier(0.79, 0.0, 0.2, 0.5) infinite alternate;
+}
+
+#nav-left, #nav-right {
+  display: flex;
+  flex-direction: row;
 }
 
 .nav-blocks {

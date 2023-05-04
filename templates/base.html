@@ -10,10 +10,17 @@
   </head>
   <body>
     <div id = "navbar">
-      <div class="nav-blocks"><a href="/"><i>NoJsMedia v2</i></a></div>
-      <div class="nav-blocks"><a href="explore">Explore</a></div>
-      <div class="nav-blocks"><a href="404">Another thing</a></div>
-      <div class="nav-blocks"><a href="404">404</a></div>
+      <div id = "nav-left">
+        <div class="nav-blocks"><a href="/"><i>NoJsMedia v2</i></a></div>
+        <div class="nav-blocks"><a href="/explore">Explore</a></div>
+        <div class="nav-blocks"><a href="/404">Another thing</a></div>
+        <div class="nav-blocks"><a href="/404">404</a></div>
+      </div>
+      <div id="nav-right">
+        <div class="nav-blocks"><a href="/signup">Signup</a></div>
+        <div class="nav-blocks"><a href="/login">Login</a></div> 
+        <div class="nav-blocks"><a href="/logout">Logout icon</a></div>
+      </div>
     </div>
     <div id="content">
       {% block content %}{% endblock %}
