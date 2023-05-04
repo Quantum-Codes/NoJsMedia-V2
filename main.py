@@ -21,7 +21,7 @@ def execute(query):
   result()
 #"""
 def hashit(password):
-  return bcrypt.hashpw(password.encode("utf-8")).decode("utf-8")
+  return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8") #don't need to save salts
   
 def compareit(hashed, password):
   return bcrypt.checkpw(password.encode("utf-8"), hashed)
