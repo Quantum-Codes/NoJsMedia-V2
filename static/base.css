@@ -27,8 +27,8 @@ a {
   margin: 1em;
   border-radius: 1em;
   justify-content: space-between;
-  padding-left: 2em;
-  padding-right: 2em;
+  padding-left: 1em;
+  padding-right: 1em;
   animation: glow 4s cubic-bezier(0.79, 0.0, 0.2, 0.5) infinite alternate;
 }
 
@@ -62,5 +62,5 @@ a {
 
 .material-symbols-rounded {
   vertical-align: middle;
-  font-size: 1.4em;
+  font-size: 1.5em;
 }
