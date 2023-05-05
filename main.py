@@ -117,7 +117,7 @@ def signuppage():
   return render_template("login.html", mode = "signup", error = request.cookies.get("temp"), loggedin = request.cookies.get("session"))
 
 @app.route("/logout", methods=["POST"]) #don't GET as people could just put this as img url and it would get this and log them out.
-def logoutpage():
+def logoutpage(): #Logging out makes 1 read and 1 write query. Try reducing to 1 write
   if not request.cookies.get("session"):
     return redirect("/")
   user = get_session(request)
