@@ -120,8 +120,10 @@ def signuppage():
 def logoutpage():
   if not request.cookies.get("session"):
     return redirect("/")
-  if get_session(request):
-    sql.execute("UPDATE Users SET session = NULL WHERE session = %s", params=(request.cookies.get("session"),))
+  user = get_session(request)
+  if user:
+    user = user[0][0]
+    sql.execute("UPDATE Users SET session = NULL WHERE username = %s", params=(user,)) #(request.cookies.get("session"),))
     db.commit()
   return respond("/", "session", "", 0)
 
