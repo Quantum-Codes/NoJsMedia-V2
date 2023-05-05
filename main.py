@@ -118,6 +118,10 @@ def signuppage():
 
 @app.route("/logout", methods=["POST"]) #don't GET as people could just put this as img url and it would get this and log them out.
 def logoutpage():
+  if not request.cookies.get("session"):
+    return redirect("/")
+  if get_session(request):
+    sql.execute("UPDATE Users SET session = NULL WHERE session = %s", params=(request.cookies.get("session"),))
   return respond("/", "session", "", 0)
 
 @app.errorhandler(404)
