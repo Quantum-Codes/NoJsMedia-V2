@@ -21,7 +21,8 @@
         <div class="nav-blocks"><a href="/signup"><span class="material-symbols-rounded">person_add</span>Signup</a></div>
         <div class="nav-blocks"><a href="/login"><span class="material-symbols-rounded">login</span>Login</a></div>
       {% else %}
-        <div class="nav-blocks"><a href="/logout"><span class="material-symbols-rounded">logout</span></a></div>
+        <form id="logout" action="/logout" method="post"></form>
+        <div class="nav-blocks"><button type="submit" form="logout" id="logoutbutton" value=""><span class="material-symbols-rounded">logout</span></button></div><!-- use button and not input as button us a container element unlike input-->
       {% endif %}
       </div>
     </div>
