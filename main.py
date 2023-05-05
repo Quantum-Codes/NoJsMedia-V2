@@ -122,6 +122,7 @@ def logoutpage():
     return redirect("/")
   if get_session(request):
     sql.execute("UPDATE Users SET session = NULL WHERE session = %s", params=(request.cookies.get("session"),))
+    db.commit()
   return respond("/", "session", "", 0)
 
 @app.errorhandler(404)
