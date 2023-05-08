@@ -49,17 +49,13 @@ a {
   transition: background 0.1s linear;
   border-radius: 2px;
 }
-
-.nav-blocks > a {
-  color: inherit;
-}
     
 .nav-blocks:hover {
   background: #006cd1;
   transition: background 0.1s linear;
 }
 
-.nav-blocks > a > span {
+a > .nav-blocks > span {
   margin-right: 4px;
 }
 
