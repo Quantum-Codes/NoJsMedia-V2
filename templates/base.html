@@ -11,15 +11,15 @@
   <body>
     <div id = "navbar">
       <div id = "nav-left">
-        <div class="nav-blocks"><a href="/"><span class="material-symbols-rounded">code_off</span><i><b>NoJsMedia v2</b></i></a></div>
-        <div class="nav-blocks"><a href="/explore"><span class="material-symbols-rounded">whatshot</span>Explore</a></div>
-        <div class="nav-blocks"><a href="/404"><span class="material-symbols-rounded">not_listed_location</span>Another thing</a></div>
-        <div class="nav-blocks"><a href="/404"><span class="material-symbols-rounded">error</span>404</a></div>
+        <a href="/"><div class="nav-blocks"><span class="material-symbols-rounded">code_off</span><i><b>NoJsMedia v2</b></i></div></a>
+        <a href="/explore"><div class="nav-blocks"><span class="material-symbols-rounded">whatshot</span>Explore</div></a>
+        <a href="/404"><div class="nav-blocks"><span class="material-symbols-rounded">not_listed_location</span>Another thing</div></a>
+        <a href="/404"><div class="nav-blocks"><span class="material-symbols-rounded">error</span>404</div></a>
       </div>
       <div id="nav-right">
       {% if not loggedin %}
-        <div class="nav-blocks"><a href="/signup"><span class="material-symbols-rounded">person_add</span>Signup</a></div>
-        <div class="nav-blocks"><a href="/login"><span class="material-symbols-rounded">login</span>Login</a></div>
+        <a href="/signup"><div class="nav-blocks"><span class="material-symbols-rounded">person_add</span>Signup</div></a>
+        <a href="/login"><div class="nav-blocks"><span class="material-symbols-rounded">login</span>Login</div></a>
       {% else %}
         <form id="logout" action="/logout" method="post"></form>
         <div class="nav-blocks"><button type="submit" form="logout" id="logoutbutton" value=""><span class="material-symbols-rounded">logout</span></button></div><!-- use button and not input as button us a container element unlike input-->
