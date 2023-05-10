@@ -1,6 +1,7 @@
 from flask import Flask, redirect, render_template, request, make_response
 import mysql.connector, os, re, secrets
 import bcrypt
+#POETRY ADD REPLIT BACK IF ANY WEIRD ERROR 
 #REMAKE DIV CONTAINING ERROR MESSAGE
 #ONLY MAIN PAGE ACTUALLY VERIFIES SESSION. OTHERS SIMPLY CHECK THE PRESENCE OF SESSION COOKIE
 app = Flask('app')
