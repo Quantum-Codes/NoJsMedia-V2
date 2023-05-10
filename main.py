@@ -123,7 +123,7 @@ def logoutpage(): #Logging out makes 1 read and 1 write query. Try reducing to 1
   user = get_session(request)
   if user:
     user = user[0][0]
-    sql.execute("UPDATE Users SET session = NULL WHERE username = %s", params=(user,)) #(request.cookies.get("session"),))
+    sql.execute("UPDATE Users SET session = NULL WHERE username = %s", params=(user,))
     db.commit()
   return respond("/", "session", "", 0)
 

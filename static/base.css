@@ -82,3 +82,13 @@ a > .nav-blocks > span {
 	cursor: pointer;
 	outline: inherit;
 }
+
+hr {
+  border: none;
+  background: #d4d4d4;
+  border-radius: 20px;
+  width: 25%;
+  margin-left: 0px;
+  margin-top: 1.2em;
+  height: 0.4em;
+}
