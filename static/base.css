@@ -93,10 +93,6 @@ hr {
   height: 0.4em;
 }
 
-.post, .post > * { /* remove after testing */
-  border: solid 2px white;
-}
-
 .post {
   width: 80vw;
   margin: 0.5em auto;
@@ -126,4 +122,8 @@ hr {
 
 .post-username {
   padding: 0.5em;
+  border: 2px solid grey;
+  border-image: linear-gradient(black, gray, black) 30; /* very bad, just use a styled hr ig */
+  border-width: 4px;
+  border-style: solid;
 }
