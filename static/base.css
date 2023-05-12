@@ -93,17 +93,19 @@ hr {
   height: 0.4em;
 }
 
-.post, .post > * {
+.post, .post > * { /* remove after testing */
   border: solid 2px white;
 }
 
 .post {
   width: 80vw;
-  margin: 0px auto;
+  margin: 0.5em auto;
   padding: 5px;
   display: grid;
   grid-template-columns: auto 1fr;
   grid-gap: 5px;
+  border: 2px solid darkgray;
+  border-radius: 1em;
 }
 
 .post-pfp {
@@ -113,6 +115,8 @@ hr {
   position: sticky;
   top: 0;
   border-radius: 50%;
+  border: 1px solid darkgray;
+  overflow: hidden; /* this is for when i actually put images */
 }
 
 .post-content {
