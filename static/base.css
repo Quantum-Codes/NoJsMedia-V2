@@ -92,3 +92,34 @@ hr {
   margin-top: 1.2em;
   height: 0.4em;
 }
+
+.post, .post > * {
+  border: solid 2px white;
+}
+
+.post {
+  width: 80vw;
+  margin: 0px auto;
+  padding: 5px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 5px;
+}
+
+.post-pfp {
+  aspect-ratio: 1/1;
+  width: 3em;
+  align-self: start;
+  position: sticky;
+  top: 0;
+  border-radius: 50%;
+}
+
+.post-content {
+  grid-column-start: 2;
+  padding: 1em;
+}
+
+.post-username {
+  padding: 0.5em;
+}

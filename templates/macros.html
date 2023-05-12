@@ -1,2 +1,7 @@
-{% macro post(user="testuser", content= "Abcdefghijklmnop rgtertge grtertge gtr" %}
-{% endmacro %} --- check whether correct
+{% macro post(user="testuser", content= "Abcdefghijklmnop rgtertge grtertge gtr") %}
+  <div class = "post">
+    <div class = "post-pfp">PFP</div>
+    <div class = "post-username">{{user}}</div>
+    <div class = "post-content">{{content}}</div>
+  </div>
+{% endmacro %}

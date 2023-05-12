@@ -1,3 +1,4 @@
+{% from "macros.html" import post %}
 {% extends "base.html" %}
 {% block title %}Homepage{% endblock %}
 {% block css %}main{% endblock %}
@@ -6,5 +7,7 @@
 <h1>Welcome {{user}}</h1>
 You have {% if not loggedin %}not {% endif %} logged in.
 <hr>
-<h2>Feed:</h2>
+{% for I in range(10) %}
+  {{ post() }}
+{% endfor %}
 {% endblock %}
