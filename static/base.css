@@ -134,6 +134,11 @@ hr {
   border-bottom: solid 2px lightgray;
 }
 
+.post-username > a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .post-contentgrid {
   display: flex;
   flex-direction: column;
@@ -142,6 +147,11 @@ hr {
 .post-tools {
   border-top: 1px solid lightgray;
   padding: 0.5em;
+}
+
+.post-tools > span {
+  font-size: 1.5em;
+  margin: 0em 0.25em;
 }
 
 /*
