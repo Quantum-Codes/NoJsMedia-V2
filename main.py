@@ -4,7 +4,7 @@ import bcrypt
 #POETRY ADD REPLIT BACK IF ANY WEIRD ERROR 
 #REMAKE DIV CONTAINING ERROR MESSAGE
 #ONLY MAIN PAGE ACTUALLY VERIFIES SESSION. OTHERS SIMPLY CHECK THE PRESENCE OF SESSION COOKIE
-dotenv.load_dotenv()
+#dotenv.load_dotenv()
 app = Flask('app')
 uname = re.compile("^[A-Za-z0-9-_]{3,25}$")
 passwd = re.compile("^[A-Za-z0-9-_\$@\&!#\?]{3,50}$")
