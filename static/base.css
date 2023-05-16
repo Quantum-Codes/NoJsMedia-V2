@@ -93,14 +93,12 @@ hr {
   height: 0.4em;
 }
 
-.post, .post > * { /* remove after testing */
-  border: solid 2px white;
-}
-
 .post {
-  width: 80vw;
+  max-width: 800px;
   margin: 0.5em auto;
-  padding: 5px;
+  padding: 1em;
+  padding-top: 0.25em;
+  padding-bottom: 0em;
   display: grid;
   grid-template-columns: auto 1fr;
   grid-gap: 5px;
@@ -110,6 +108,7 @@ hr {
 
 .post-pfp {
   aspect-ratio: 1/1;
+  margin-top: 0.75em;
   width: 3em;
   align-self: start;
   position: sticky;
@@ -119,11 +118,33 @@ hr {
   overflow: hidden; /* this is for when i actually put images */
 }
 
+.post-pfp > img {
+  max-width: 100%;
+}
+
 .post-content {
   grid-column-start: 2;
-  padding: 1em;
+  padding: 0.5em;
+  padding-top: 0.75em;
 }
 
 .post-username {
   padding: 0.5em;
+  font-weight: bold;
+  border-bottom: solid 2px lightgray;
 }
+
+.post-contentgrid {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-tools {
+  border-top: 1px solid lightgray;
+  padding: 0.5em;
+}
+
+/*
+.post-contentgrid > * {
+  border: 2px solid white;
+}*/

@@ -1,7 +1,12 @@
-{% macro post(user="testuser", content= "Abcdefghijklmnop rgtertge grtertge gtr") %}
+{% macro post(user="testuser", pfp="https://placehold.jp/150x150.png", content= "Abcdefghijklmnop rgtertge grtertge gtr") %} <!--could also pass dict ad access post.user, post.content-->
   <div class = "post">
-    <div class = "post-pfp">PFP</div>
-    <div class = "post-username">{{user}}</div>
-    <div class = "post-content">{{content}}</div>
+    <div class = "post-pfp"><img src="{{pfp}}"></div>
+    <div class = "post-contentgrid">
+      <div class = "post-username">{{user}}</div>
+      <div class = "post-content">{{content}}</div>
+      <div class = "post-tools">
+        <span class="material-symbols-rounded"></span> Button2 etc etc <!-- put varable stylesheet of material symbols to fill heart icon by css-->
+      </div>
+    </div>
   </div>
 {% endmacro %}
