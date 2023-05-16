@@ -126,7 +126,6 @@ hr {
   grid-column-start: 2;
   padding: 0.5em;
   padding-top: 0.75em;
-  word-break: break-all;
   word-wrap: break-word; /*breaks really long words to prevent overflow*/
 }
 
