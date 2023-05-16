@@ -24,7 +24,7 @@ db = mysql.connector.connect(
   host = os.environ["Host"],
   user = os.environ["User"],
   password = os.environ["Pass"],
-  database = "testdb"
+  database = os.environ["Database"]
 )
 sql = db.cursor()
 

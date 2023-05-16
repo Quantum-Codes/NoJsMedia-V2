@@ -1,1 +1,1 @@
-make .env file with the path
+Put your mysql db url, password, username in the .env file ()
