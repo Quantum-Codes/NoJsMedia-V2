@@ -1,0 +1,1 @@
+make .env file with the path
