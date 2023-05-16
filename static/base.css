@@ -102,7 +102,7 @@ hr {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-gap: 5px;
-  border: 2px solid darkgray;
+  border: 3px solid darkgray;
   border-radius: 1em;
 }
 
@@ -126,6 +126,8 @@ hr {
   grid-column-start: 2;
   padding: 0.5em;
   padding-top: 0.75em;
+  word-break: break-all;
+  word-wrap: break-word; /*breaks really long words to prevent overflow*/
 }
 
 .post-username {
@@ -145,7 +147,7 @@ hr {
 }
 
 .post-tools {
-  border-top: 1px solid lightgray;
+  border-top: 1px solid #4e4e4e;
   padding: 0.5em;
 }
 

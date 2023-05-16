@@ -7,7 +7,8 @@
 <h1>Welcome {{user}}</h1>
 You have {% if not loggedin %}not {% endif %} logged in.
 <hr>
-{% for I in range(10) %}
+{% for I in range(5) %}
   {{ post() }}
+  {{ post(content="abcbcdcddsfff fafasssabcbcdcd dsffffafasssabcbc dcddsffffafass sabcbcdcddsfff fafasssabcbcds") }}
 {% endfor %}
 {% endblock %}
