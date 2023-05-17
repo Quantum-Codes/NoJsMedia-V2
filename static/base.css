@@ -126,7 +126,9 @@ hr {
   grid-column-start: 2;
   padding: 0.5em;
   padding-top: 0.75em;
-  word-wrap: break-word; /*breaks really long words to prevent overflow*/
+  word-break: break-word; /*breaks really long words to prevent overflow*/
+  overflow-wrap: break-word; /*same as word wrap. use both to support firefox*/
+  word-wrap: break-word; /*break normally also*/
 }
 
 .post-username {
