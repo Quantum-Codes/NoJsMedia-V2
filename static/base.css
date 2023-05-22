@@ -94,18 +94,21 @@ hr {
 }
 
 .post {
-  width: 80vw;
+  max-width: 800px;
   margin: 0.5em auto;
-  padding: 5px;
+  padding: 1em;
+  padding-top: 0.25em;
+  padding-bottom: 0em;
   display: grid;
   grid-template-columns: auto 1fr;
   grid-gap: 5px;
-  border: 2px solid darkgray;
+  border: 3px solid darkgray;
   border-radius: 1em;
 }
 
 .post-pfp {
   aspect-ratio: 1/1;
+  margin-top: 0.75em;
   width: 3em;
   align-self: start;
   position: sticky;
@@ -115,15 +118,41 @@ hr {
   overflow: hidden; /* this is for when i actually put images */
 }
 
+.post-pfp > img {
+  max-width: 100%;
+}
+
 .post-content {
   grid-column-start: 2;
-  padding: 1em;
+  padding: 0.5em;
+  padding-top: 0.75em;
+  word-break: break-word; /*breaks really long words to prevent overflow*/
+  overflow-wrap: break-word; /*same as word wrap. use both to support firefox*/
+  word-wrap: break-word; /*break normally also*/
 }
 
 .post-username {
   padding: 0.5em;
-  border: 2px solid grey;
-  border-image: linear-gradient(black, gray, black) 30; /* very bad, just use a styled hr ig */
-  border-width: 4px;
-  border-style: solid;
+  font-weight: bold;
+  border-bottom: solid 2px lightgray;
+}
+
+.post-username > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-contentgrid {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-tools {
+  border-top: 1px solid #4e4e4e;
+  padding: 0.5em;
+}
+
+.post-tools > span {
+  font-size: 1.5em;
+  margin: 0em 0.25em;
 }

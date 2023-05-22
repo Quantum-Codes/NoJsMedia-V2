@@ -1,9 +1,12 @@
+#CHANGE PASSWORD IN THE .ENV.. MAY HAVE BEEN TRACKED IN GIT
+
 from flask import Flask, redirect, render_template, request, make_response
-import mysql.connector, os, re, secrets
+import mysql.connector, os, re, secrets, dotenv
 import bcrypt
 #POETRY ADD REPLIT BACK IF ANY WEIRD ERROR 
 #REMAKE DIV CONTAINING ERROR MESSAGE
 #ONLY MAIN PAGE ACTUALLY VERIFIES SESSION. OTHERS SIMPLY CHECK THE PRESENCE OF SESSION COOKIE
+dotenv.load_dotenv()
 app = Flask('app')
 uname = re.compile("^[A-Za-z0-9-_]{3,25}$")
 passwd = re.compile("^[A-Za-z0-9-_\$@\&!#\?]{3,50}$")
@@ -23,7 +26,7 @@ db = mysql.connector.connect(
   host = os.environ["Host"],
   user = os.environ["User"],
   password = os.environ["Pass"],
-  database = "testdb"
+  database = os.environ["Database"]
 )
 sql = db.cursor()
 
@@ -67,7 +70,7 @@ def mainpage():
   if request.cookies.get("session"):
     session = get_session(request)
     if not session:
-      return respond("/", "session", "", 0) #delete session cookie
+      return respond("/", "session", "", 0)  # delete session cookie
     loggedin = True
     username, displayname = session[0]
   else:
@@ -80,14 +83,14 @@ def loginpage():
     if not (request.form["username"] and request.form["password"]):
       return respond("/login", "temp", "Username or password field was left empty.", 2)
     username = request.form["username"].strip().lower()
-    if not uname.fullmatch(username): #saves a useless read
+    if not uname.fullmatch(username):  # saves a useless read
       return respond("/login", "temp", "No such user exists.", 2)
     if not passwd.fullmatch(request.form["password"]):
       return respond("/login", "temp", "Invalid password.", 2)
       
     sql.execute("SELECT password FROM Users WHERE username = %s;", params=(username,))
     password = [i for i in sql]
-    if not password: #no user. so empty
+    if not password:  # no user. so empty
       return respond("/login", "temp", "No such user exists.", 2)
     if not compareit(password[0][0], request.form["password"]):
       return respond("/login", "temp", "Incorrect password.", 2)

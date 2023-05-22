@@ -4,3 +4,4 @@ replit.nix
 /venv
 .breakpoints
 /.config
+.env
