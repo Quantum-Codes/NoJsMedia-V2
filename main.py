@@ -1,5 +1,3 @@
-#CHANGE PASSWORD IN THE .ENV.. MAY HAVE BEEN TRACKED IN GIT
-
 from flask import Flask, redirect, render_template, request, make_response
 import mysql.connector, os, re, secrets, dotenv
 import bcrypt
