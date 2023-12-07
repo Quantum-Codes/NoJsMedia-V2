@@ -24,7 +24,8 @@ db = mysql.connector.connect(
   host = os.environ["Host"],
   user = os.environ["User"],
   password = os.environ["Pass"],
-  database = os.environ["Database"]
+  database = os.environ["Database"],
+  autocommit = True 
 )
 sql = db.cursor()
 
@@ -112,9 +113,15 @@ def signuppage():
     if not passwd.fullmatch(request.form["password"]):
       return respond("/signup", "temp", "Password must have length of 3 to 50 and only characters A-Z, a-z, 0-9, &,#,₩,₹,£,€,&,!,@,?", 2)
 
-    sql.execute("INSERT INTO Users (id, username, display, password) VALUES (UUID_SHORT(), %s, %s, %s)", params=(username.lower(), username, hashit(request.form["password"])))
+    sql.execute("SELECT id FROM Users WHERE username = %s;", params=(username.lower(),))
+    if sql.fetchone():
+      return respond("/signup", "temp", "User already exists. Use another username.", 2)
+    sql.execute("INSERT INTO Users (id, username, display, password) VALUES (UUID_SHORT(), %s, %s, %s);", params=(username.lower(), username, hashit(request.form["password"])))
     db.commit()
-    return "Created user. Should add session and redirect to main site."
+    #Verified user from here
+    session = secrets.token_urlsafe(32)
+    sql.execute("UPDATE Users SET session = %s WHERE username = %s", params = (session, username))
+    return respond("/", "session", session)
     
   return render_template("login.html", mode = "signup", error = request.cookies.get("temp"), loggedin = request.cookies.get("session"))
 
