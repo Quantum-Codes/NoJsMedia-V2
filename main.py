@@ -138,6 +138,12 @@ def logoutpage(): #Logging out makes 1 read and 1 write query. Try reducing to 1
 
 @app.errorhandler(404)
 def notfoundpage(e):
-  return render_template("404.html")
+    loggedin = False
+    if request.cookies.get("session"):
+        session = get_session(request)
+        if not session:
+            return respond("/404", "session", "", 0)  # delete session cookie
+        loggedin = True
+    return render_template("404.html", loggedin = loggedin)
 
 app.run(host='0.0.0.0', port=8080)
